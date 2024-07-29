@@ -16,8 +16,6 @@ public class TicketService {
 
         System.out.println("Creating null ticket:");
         Ticket nullTicket = new Ticket();
-        //Under construction!!! will fix next time
-        //System.out.println(nullTicket);
         System.out.println();
 
 
@@ -26,10 +24,11 @@ public class TicketService {
         Ticket fullTicketExample = new Ticket(123, "Stadium", 123, 123L, true, StadiumSector.B, 10.53f, BigDecimal.valueOf(149.99));
         fullTicketExample.shared(12345,"email");
         System.out.println(fullTicketExample);
+        fullTicketExample.print();
         System.out.println();
 
         System.out.println("Creating limited ticket and sharing it");
-        //Overloaded constructor for limited ticket
+        //Overloading .shared method and constructor for limited ticket
         Ticket limitedTicketExample = new Ticket("Square",1233, 123L, BigDecimal.valueOf(9.99));
         limitedTicketExample.shared(12345);
         System.out.println(limitedTicketExample);
@@ -61,8 +60,14 @@ public class TicketService {
         customer.printRole();
         customer.getTicket();
 
+        Ticket ticketForHashcodeEqualsTry1 = new Ticket(123, "Stadium", 123, 123L, true, StadiumSector.B, 10.53f, BigDecimal.valueOf(149.99));
+        Ticket ticketForHashcodeEqualsTry2 = new Ticket(123, "Stadium", 123, 123L, false, StadiumSector.B, 10.53f, BigDecimal.valueOf(149.99));
+        Ticket ticketForHashcodeEqualsTry3 = new Ticket(124, "Stadium", 123, 123L, true, StadiumSector.B, 10.53f, BigDecimal.valueOf(149.99));
+        System.out.println(ticketForHashcodeEqualsTry1.equals(ticketForHashcodeEqualsTry2));
+        System.out.println(ticketForHashcodeEqualsTry2.equals(ticketForHashcodeEqualsTry1));
 
-
-
+        System.out.println(ticketForHashcodeEqualsTry1.hashCode());
+        System.out.println(ticketForHashcodeEqualsTry2.hashCode());
+        System.out.println(ticketForHashcodeEqualsTry3.hashCode());
     }
 }

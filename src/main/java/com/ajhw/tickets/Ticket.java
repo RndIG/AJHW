@@ -3,6 +3,7 @@ package com.ajhw.tickets;
 
 import com.ajhw.annotations.NullableWarning;
 import com.ajhw.annotations.NullableWarningProcessor;
+import com.ajhw.utils.Printable;
 import com.ajhw.utils.StadiumSector;
 
 import java.math.BigDecimal;
@@ -14,7 +15,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.Objects;
 
 
-public class Ticket {
+public class Ticket implements Printable {
 
     @NullableWarning
     private Integer id;
@@ -64,9 +65,7 @@ public class Ticket {
     }
 
 
-    public Integer getId() {
-        return id;
-    }
+
 
     public String getVenue() {
         return venue;
@@ -100,9 +99,7 @@ public class Ticket {
         return creationTime;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+
 
     public void setTime(Long time) {
         this.time = time;
@@ -110,6 +107,16 @@ public class Ticket {
 
     public void setStadiumSector(StadiumSector stadiumSector) {
         this.stadiumSector = stadiumSector;
+    }
+
+
+
+    public Integer getId () {
+        return this.id;
+    }
+
+    public void setId (Integer id) {
+        this.id = id;
     }
 
     public void shared(Integer phoneNumber){
@@ -145,8 +152,37 @@ public class Ticket {
         return textRepresentation.toString();
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+        if (!(o instanceof Ticket)) {
+            return false;
+        }
+        Ticket other = (Ticket)o;
+        return (this.id.equals(other.id)
+                && this.venue.equals(other.venue)
+                && this.eventCode.equals(other.eventCode)
+                && this.time.equals(other.time));
+    }
 
-
-
+    @Override
+    public final int hashCode() {
+        int result = 19;
+        if (id != null) {
+            result = 31 * result + id.hashCode();
+        }
+        if (venue != null) {
+            result = 31 * result + venue.hashCode();
+        }
+        if (eventCode != null) {
+            result = 31 * result + eventCode.hashCode();
+        }
+        if (time != null) {
+            result = 31 * result + time.hashCode();
+        }
+        return result;
+    }
 
 }
