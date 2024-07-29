@@ -145,9 +145,7 @@ public class Ticket {
         return textRepresentation.toString();
     }
 
-    private String nullSafe(Object o) {
-        return o == null ? "null" : o.toString();
-    }
+
 
 
 
